@@ -26,8 +26,10 @@ def sendvote():
 	if not request.json or not 'voters_id' in request.json:
 		abort(400)
 	voters_id = request.json['voters_id']
+	proposal = request.json['proposal']
 	vote = {
 	  'id': voters_id,
+	  'proposal': proposal,
 	  'submitted_to': play(voters_id),
 	  'done': True
 	}
