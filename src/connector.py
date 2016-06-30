@@ -8,12 +8,12 @@ from two1.wallet import Wallet
 from two1.bitserv.flask import Payment
 
 app = Flask(__name__)
-wallet = Wallet()
+wallet = Wallet('./proposal.json')
 payment = Payment(app, wallet)
 
 @app.route('/write-vote')
 @payment.required(1)
-def answer_question():
+def writevote():
 	# extract answer from client request
 	answer = request.args.get('id')
 	voted_id = "Vote OK: " + answer + " to wallet: " + wallet.get_payout_address()
