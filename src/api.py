@@ -3,6 +3,7 @@ from flask import Flask
 from flask import jsonify
 from flask import request
 from flask import abort
+
 from two1.wallet import Wallet
 from two1.bitrequests import BitTransferRequests
 
@@ -14,10 +15,18 @@ requests = BitTransferRequests(wallet)
 server_url = 'http://localhost:8000/'
 
 
-# Service
+# Start flask service
 app = Flask(__name__)
 
+#definition of micropayment_sendvote function
 def micropayment_sendvote(proposal):
+	'''
+	Function: micropayment_sendvote()
+
+	Arguments:
+	 -	proposal: sting.
+	 	Possible values: yes / no
+	'''
     ans = str(proposal)
     sel_url = server_url + 'write-vote?proposal={0}'
     answer = requests.post(url=sel_url.format(ans))
@@ -43,7 +52,7 @@ def sendvote():
 	}
 	return jsonify(vote)
 
-#/vote count
+#/vote-count
 @app.route('/vote-count', methods=['GET'])
 def grabvotes():
 	sel_url = server_url + 'count'

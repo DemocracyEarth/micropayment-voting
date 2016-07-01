@@ -8,20 +8,33 @@ from flask import jsonify
 from two1.wallet import Wallet
 from two1.bitserv.flask import Payment
 
+
+# initial value for the proposals counter
 proposal_yes = 0
 proposal_no = 0
 
+# Start flask service
 app = Flask(__name__)
+
+# Start an instance of the bitcoin wallet
 wallet = Wallet()
 payment = Payment(app, wallet)
 
 
 
-def increase_proposal(value):
+def increase_proposal(vote):
+	'''
+	Function: increase_proposal()
+
+	Arguments:
+	 - vote (string).
+	 Possible values: yes / no
+
+	'''
 	global proposal_yes, proposal_no
-	if value == 'yes':
+	if vote == 'yes':
 		proposal_yes = proposal_yes + 1
-	elif value == 'no':
+	elif vote == 'no':
 		proposal_no = proposal_no + 1
 	else:
 		print('Value for proposal is not valid')
