@@ -4,7 +4,7 @@
 Web browser <--> Front-end <--> **api.py <--> connector.py**
 
 ## api.py
-RESTful service for vote saving. This module only receives and transmit
+RESTful service for vote saving. This module only receives and transmits
 information to the connector.py script and to the front-end instances.
 
 Resource | HTTP Method | URL and arguments | Returns
