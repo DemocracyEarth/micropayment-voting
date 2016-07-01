@@ -14,6 +14,13 @@ server_url = 'http://localhost:8000/'
 # Service
 app = Flask(__name__)
 
+def micropayment_sendvote(proposal):
+    ans = str(proposal)
+    sel_url = server_url + 'write-vote?proposal={0}'
+    answer = requests.post(url=sel_url.format(ans))
+    return answer.text
+
+
 # /wallet route to verify our wallet
 @app.route('/wallet', methods=['GET'])
 def get_wallet():
@@ -23,23 +30,23 @@ def get_wallet():
 # /send-vote route to submit a vote
 @app.route('/send-vote', methods=['POST'])
 def sendvote():
-	if not request.json or not 'voters_id' in request.json:
+	if not request.json or not 'proposal' in request.json:
 		abort(400)
-	voters_id = request.json['voters_id']
 	proposal = request.json['proposal']
 	vote = {
-	  'id': voters_id,
 	  'proposal': proposal,
-	  'submitted_to': play(voters_id),
+	  'submitted_to': micropayment_sendvote(proposal),
 	  'done': True
 	}
 	return jsonify(vote)
 
-def play(voter_id_from_web):
-    ans = str(voter_id_from_web)
-    sel_url = server_url + 'write-vote?id={0}'
-    answer = requests.get(url=sel_url.format(ans))
-    return answer.text
+#/vote count
+@app.route('/vote-count', methods=['GET'])
+def grabvotes():
+	sel_url = server_url + 'count'
+	total_votes = requests.get(url=sel_url.format())
+	return jsonify(total_votes.text)
+
 
 if __name__ == '__main__':
 	app.run(host='0.0.0.0',port=8008)
