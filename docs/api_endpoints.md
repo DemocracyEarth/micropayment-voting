@@ -4,7 +4,7 @@
 Web browser <--> Front-end <--> **api.py <--> connector.py**
 
 ## api.py
-RESTful service for vote saving
+RESTful service for vote saving. This module only receives and transmit information to the connector.py script and to the front-end instances.
 
 Resource | HTTP Method | URL and arguments | Returns
 ----|-----|----- |-----|
@@ -14,7 +14,7 @@ Vote status | GET | <host:port>/vote-count | Total number of votes on each optio
 
 
 ## connector.py
-21.co server for operations over micropayments (One satoshi per operation)
+21.co server for operations over micropayments (One satoshi per operation). This connector provides information for the api.py module and manages the operations for Blockchain events
 
 Resource | HTTP Method | URL and arguments | Returns
 ----|-----|-----|-----|
