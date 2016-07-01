@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-from flask import Flask, jsonify, request, abort
+from flask import Flask
+from flask import jsonify
+from flask import request
+from flask import abort
 from two1.wallet import Wallet
 from two1.bitrequests import BitTransferRequests
 
