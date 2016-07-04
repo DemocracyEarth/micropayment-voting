@@ -18,7 +18,7 @@ server_url = 'http://localhost:8000/'
 # Start flask service
 app = Flask(__name__)
 
-#definition of micropayment_sendvote function
+# definition of micropayment_sendvote function
 def micropayment_sendvote(proposal):
 	'''
 	Function: micropayment_sendvote()
@@ -52,7 +52,7 @@ def sendvote():
 	}
 	return jsonify(vote)
 
-#/vote-count
+# /vote-count
 @app.route('/vote-count', methods=['GET'])
 def grabvotes():
 	sel_url = server_url + 'count'
